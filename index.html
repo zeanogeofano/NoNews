@@ -1,9 +1,60 @@
-<div class="section-title" style="margin-top: 30px;">
-        <span>Market News</span>
-        <span class="live-tag">● LATEST</span>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeano Finance | Premium Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="header-flex">
+        <div style="display: flex; gap: 14px; align-items: center;">
+            <div class="avatar-glow">Z</div>
+            <div>
+                <div style="font-weight: 700; font-size: 16px;">Zeano Geofano</div>
+                <div style="font-size: 12px; color: var(--text-dim);">Pro Trading Account</div>
+            </div>
+        </div>
+        <div style="background: var(--card); border: 1px solid var(--border); padding: 10px; border-radius: 14px;">🔔</div>
     </div>
 
-    <div class="widget-container" style="height: 500px; overflow: hidden;">
+    <div class="glass-card">
+        <p class="label-sm">Total Assets Balance</p>
+        <h1 class="amount">$12,840.50</h1>
+        <span class="trend-tag">▲ +3.42% Today</span>
+    </div>
+
+    <div class="section-title">
+        <div class="dot-live"></div> Market Watchlist
+    </div>
+    
+    <div class="glass-card" style="padding: 10px; border-radius: 20px;">
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+            {
+              "colorTheme": "dark",
+              "dateRange": "12M",
+              "showChart": true,
+              "locale": "id",
+              "width": "100%",
+              "height": "350",
+              "isTransparent": true,
+              "symbols": [
+                { "s": "NASDAQ:AAPL", "d": "Apple" },
+                { "s": "NASDAQ:TSLA", "d": "Tesla" },
+                { "s": "OANDA:XAUUSD", "d": "Gold / Emas" },
+                { "s": "BITSTAMP:BTCUSD", "d": "Bitcoin" }
+              ]
+            }
+            </script>
+        </div>
+    </div>
+
+    <div class="section-title">Latest Market News</div>
+    <div class="glass-card" style="padding: 0; height: 450px; overflow: hidden;">
         <div class="tradingview-widget-container">
             <div class="tradingview-widget-container__widget"></div>
             <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
@@ -11,11 +62,19 @@
               "feedMode": "all_symbols",
               "colorTheme": "dark",
               "isTransparent": true,
-              "displayMode": "regular",
               "width": "100%",
-              "height": "100%",
-              "locale": "id"
+              "height": "100%"
             }
             </script>
         </div>
-        </div>
+    </div>
+
+    <nav class="nav-dock">
+        <a href="#" class="nav-btn active">🏠</a>
+        <a href="#" class="nav-btn">📊</a>
+        <a href="#" class="nav-btn">📰</a>
+        <a href="#" class="nav-btn">👤</a>
+    </nav>
+
+</body>
+</html>
