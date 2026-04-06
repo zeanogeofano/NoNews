@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Market Tracker</title>
+    <style>
+        body { background-color: #121212; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { text-align: center; background: #1e1e1e; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .price-card { margin: 20px; padding: 15px; border-bottom: 1px solid #333; }
+        .price { font-size: 2.5rem; font-weight: bold; transition: color 0.3s ease; }
+        .label { color: #888; text-transform: uppercase; letter-spacing: 1px; }
+        .up { color: #44ff44; }
+        .down { color: #ff4444; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Live Market Dashboard</h2>
+    
+    <div class="price-card">
+        <div class="label">Bitcoin (BTC/USD)</div>
+        <div id="btc-price" class="price">Memuat...</div>
+    </div>
+
+    <div class="price-card">
+        <div class="label">Gold (XAU/USD)</div>
+        <div id="xau-price" class="price">Memuat...</div>
+    </div>
+</div>
+
+<script>
+    let lastBtc = 0;
+    let lastXau = 0;
+
+    async function fetchPrices() {
+        try {
+            // Mengambil data dari API Binance (Crypto)
+            const btcRes = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT');
+            const btcData = await btcRes.json();
+            updatePrice('btc-price', parseFloat(btcData.price), lastBtc);
+            lastBtc = parseFloat(btcData.price);
+
+            // Mengambil data Emas (Contoh menggunakan API publik atau mock data jika API key belum ada)
+            // Untuk XAU/USD real-time biasanya butuh API Key (seperti AlphaVantage/OANDA)
+            // Di sini kita simulasi pergerakan dari base price untuk demo warna
+            const fakeXau = 2300 + (Math.random() * 10); 
+            updatePrice('xau-price', fakeXau, lastXau);
+            lastXau = fakeXau;
+
+        } catch (err) {
+            console.error("Gagal mengambil data:", err);
+        }
+    }
+
+    function updatePrice(elementId, newPrice, oldPrice) {
+        const el = document.getElementById(elementId);
+        el.innerText = `$${newPrice.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+        
+        if (oldPrice > 0) {
+            if (newPrice > oldPrice) {
+                el.className = 'price up';
+            } else if (newPrice < oldPrice) {
+                el.className = 'price down';
+            }
+        }
+    }
+
+    // Update setiap 3 detik
+    setInterval(fetchPrices, 3000);
+    fetchPrices();
+</script>
+
+</body>
+</html>
